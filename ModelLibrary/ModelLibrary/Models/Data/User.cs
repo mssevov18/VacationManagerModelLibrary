@@ -23,6 +23,7 @@ namespace ModelLibrary.Models.Data
         [Required]
         [StringLength(50)]
         public string Username { get; set; }
+        [Required]
         [StringLength(15)]
         public string Password { get; set; }
         [Required]
@@ -34,6 +35,35 @@ namespace ModelLibrary.Models.Data
         [Required]
         [StringLength(1)]
         public string Role { get; set; }
+        [NotMapped]
+        public string TextRole
+		{
+			get
+            {
+                if (Role == null)
+                    return "NULL!";
+                switch (Role[0])
+                {
+                    case 'C':
+                    case 'c':
+                        return "CEO";
+                    case 'D':
+                    case 'd':
+                        return "Developer";
+                    case 'L':
+                    case 'l':
+                        return "Team Lead";
+                }
+                return "Unassigned";
+            }
+		}
+        [NotMapped]
+        public bool CanEditUsers => Role == "C";
+        [NotMapped]
+        public bool CanEditTeams => Role == "C" || Role == "L";
+        [NotMapped]
+        public bool CanEditProjects => Role == "C" || Role == "L";
+
         public bool IsDeleted { get; set; }
 
         [InverseProperty(nameof(UsersInTeamsConnection.User))]

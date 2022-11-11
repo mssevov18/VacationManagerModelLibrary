@@ -8,6 +8,8 @@
     <Folder Include="Models\Classes\" />
     <Folder Include="Models\Data\" />
     <Folder Include="Models\Interfaces\" />
+    <Folder Include="Models\Classes\" />
+    <Folder Include="Models\Interfaces\" />
   </ItemGroup>
 
   <ItemGroup>
